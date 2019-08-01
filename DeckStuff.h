@@ -135,60 +135,6 @@ void PrintDeck(card** first)
                     printf("%d of C\n", temp -> face);
             }
             
-            
-//            //print by suit (for loop from 0 to 4)
-//            if (i == 0) //hearts
-//            {
-//                if (temp -> face == 1 && temp -> suit == 'H') //ace represents the first card of each suit
-//                    printf("A of %c\n", temp -> suit);
-//                else if (temp -> face == 11 && temp -> suit == 'H') //jack represents the 11th card
-//                    printf("J of %c\n", temp -> suit);
-//                else if (temp -> face == 12 && temp -> suit == 'H') //queen represents the 12th card
-//                    printf("Q of %c\n", temp -> suit);
-//                else if (temp -> face == 13 && temp -> suit == 'H') //king represents the 13th (last card)
-//                    printf("K of %c\n", temp -> suit);
-//                else if (temp -> suit == 'H') //all the regular numbered cards
-//                    printf("%d of %c\n", temp -> face, temp -> suit);
-//            }
-//            else if (i == 1) //diamonds
-//            {
-//                if (temp -> face == 1 && temp -> suit == 'D') //ace represents the first card of each suit
-//                    printf("A of %c\n", temp -> suit);
-//                else if (temp -> face == 11 && temp -> suit == 'D') //jack represents the 11th card
-//                    printf("J of %c\n", temp -> suit);
-//                else if (temp -> face == 12 && temp -> suit == 'D') //queen represents the 12th card
-//                    printf("Q of %c\n", temp -> suit);
-//                else if (temp -> face == 13 && temp -> suit == 'D') //king represents the 13th (last card)
-//                    printf("K of %c\n", temp -> suit);
-//                else if (temp -> suit == 'D') //all the regular numbered cards
-//                    printf("%d of %c\n", temp -> face, temp -> suit);
-//            }
-//            else if (i == 2) //spades
-//            {
-//                if (temp -> face == 1 && temp -> suit == 'S') //ace represents the first card of each suit
-//                    printf("A of %c\n", temp -> suit);
-//                else if (temp -> face == 11 && temp -> suit == 'S') //jack represents the 11th card
-//                    printf("J of %c\n", temp -> suit);
-//                else if (temp -> face == 12 && temp -> suit == 'S') //queen represents the 12th card
-//                    printf("Q of %c\n", temp -> suit);
-//                else if (temp -> face == 13 && temp -> suit == 'S') //king represents the 13th (last card)
-//                    printf("K of %c\n", temp -> suit);
-//                else if (temp -> suit == 'S') //all the regular numbered cards
-//                    printf("%d of %c\n", temp -> face, temp -> suit);
-//            }
-//            else //clubs
-//            {
-//                if (temp -> face == 1 && temp -> suit == 'C') //ace represents the first card of each suit
-//                    printf("A of %c\n", temp -> suit);
-//                else if (temp -> face == 11 && temp -> suit == 'C') //jack represents the 11th card
-//                    printf("J of %c\n", temp -> suit);
-//                else if (temp -> face == 12 && temp -> suit == 'C') //queen represents the 12th card
-//                    printf("Q of %c\n", temp -> suit);
-//                else if (temp -> face == 13 && temp -> suit == 'C') //king represents the 13th (last card)
-//                    printf("K of %c\n", temp -> suit);
-//                else if (temp -> suit == 'C') //all the regular numbered cards
-//                    printf("%d of %c\n", temp -> face, temp -> suit);
-//            }
             temp = temp->next; //move pointer down
             //count++; //keep a count of the cards
         }
@@ -208,6 +154,17 @@ void ShuffleCard (card *deck, int numCards) //shuffles the deck
         
         for (i = 0; i< 2000; i++) //swap 2000 times so that the deck is adequately shuffled. Does not affect time complexity
         {
+            rand1 = rand() % numCards;
+            while (rand1 == 0)
+                rand1 = rand() % numCards;
+            pt1 = deck;
+            for (i = 0; i < rand1 - 1; i++)
+                pt1 = pt1 -> next;
+            temp = pt1 -> next;
+            pt1 -> next = pt1 -> next -> next;
+            temp -> next = deck;
+            deck = temp;
+            /*
             //both pt1 & pt2 point to the first node
             pt1 = deck;
             pt2 = deck;
@@ -241,6 +198,7 @@ void ShuffleCard (card *deck, int numCards) //shuffles the deck
             
             //free memory that was allocated
             free(temp);
+             */
         }
     }
 }
